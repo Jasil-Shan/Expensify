@@ -1,37 +1,91 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useFormik } from 'formik'
+import axios from "axios";
+import { toast } from 'react-toastify'
 
 const Login = () => {
+
+    const navigate = useNavigate()
+
+    const formik = useFormik({
+
+        initialValues: {
+            email: '',
+            password: '',
+        },
+
+        onSubmit: async (values) => {
+            try {
+                const { data } = await axios.post('/login',{...values})
+                if (data?.status){
+                    navigate("/home")
+                } else {
+                    toast.error(data.message, {
+                        position: "top-center"
+                    })
+                }
+            } catch (error) {
+                console.log(error)
+            }
+
+        },
+    })
     return (
-        <div className="bg-gradient-to-br from-green-100 to-white min-h-screen flex flex-col items-center justify-center">
-            <div className="container px-6 mx-auto flex flex-col md:flex-row md:items-center">
-                <div className="flex flex-col w-full md:w-1/2 lg:w-3/4 mx-auto md:mx-0">
-                    <div className="flex flex-col items-center md:items-start">
-                        <div>
-                            <svg
-                                className="w-20 h-20 mx-auto md:float-left fill-stroke text-gray-800"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                {/* Your SVG path here */}
-                            </svg>
+        <section className="bg-gray-50 min-h-screen flex items-center justify-center">
+            <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
+                <div className="md:w-1/2 px-14">
+                    <h2 className='font-bold text-3xl text-[#002D74]'>Login</h2>
+                    <p className='text-sm mt-4 text-[#002D74]'>Welcome Back!</p>
+                    <form onSubmit={formik.handleSubmit} className='flex flex-col gap-4'>
+                        <input className='p-2 mt-8 rounded-xl border' onChange={formik.handleChange} type="email" name="email" placeholder='Email' id="" required />
+                        <div className="relative">
+                            <input className='p-2  rounded-xl border w-full' onChange={formik.handleChange} type= 'password' name='password' placeholder='Password' required />
                         </div>
-                        <h1 className="text-5xl text-gray-800 font-bold">Client Area</h1>
-                        <p className="w-5/6 mx-auto md:mx-0 text-gray-500">
-                            Control and monitorize your website data from the dashboard.
-                        </p>
+                        <button className='bg-[#002D74] rounded-xl py-2 mt-2 text-white hover:scale-105 duration-300' type="submit">Login</button>
+                    </form>
+                    <div className='mt-10 grid-cols-3 items-center text-gray-500'>
+                        <hr className=' text-gray-500' />
+                        <p className='text-center text-sm'>OR</p>
+                        <hr className=' text-gray-500' />
                     </div>
-                    <div className="bg-white p-10 flex flex-col w-full shadow-xl rounded-xl">
-                        <h2 className="text-2xl font-bold text-gray-800 text-left mb-5">
-                            Sign In
-                        </h2>
-                        <form action="" className="w-full">
-                            {/* Your form inputs and button here */}
-                        </form>
+
+                    {/* <button className='hover:scale-105 duration-300 bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm font-semibold'><svg
+                    className="mr-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 48 48"
+                    width="25px"
+                >
+                    <path
+                        fill="#FFC107"
+                        d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
+                    ></path>
+                    <path
+                        fill="#FF3D00"
+                        d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
+                    ></path>
+                    <path
+                        fill="#4CAF50"
+                        d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
+                    ></path>
+                    <path
+                        fill="#1976D2"
+                        d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
+                    ></path>
+                </svg>Login with Google</button> */}
+                    {/* <p className='mt-5 text-xs border-b py-4'>Forget your password</p> */}
+
+                    <div className='mt-3 text-xs flex justify-between items-center'>
+                        <p>Not a member yet !?</p>
+                        <Link to={'/signup'}><p className='hover:scale-105 duration-300 py-2 px-5 bg-white border rounded-xl'>Register</p></Link>
                     </div>
+
+                </div>
+
+                <div className="w-1/2 md:block hidden">
+                    <img className=' rounded-2xl'  alt="" />
                 </div>
             </div>
-        </div>
+    </section >
     );
 };
 
