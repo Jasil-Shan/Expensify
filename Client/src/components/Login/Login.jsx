@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import axios from "axios";
 import { toast } from 'react-toastify'
 import login from '../../assets/login.jpg'
+import { loginSchema } from "../../utils/validation";
 
 const Login = () => {
 
@@ -15,11 +16,13 @@ const Login = () => {
             password: '',
         },
 
+        validationSchema:loginSchema,
+
         onSubmit: async (values) => {
             try {
                 const { data } = await axios.post('/login', { ...values })
                 if (data?.status) {
-                    navigate("/home")
+                    navigate("/dashboard")
                 } else {
                     toast.error(data.message, {
                         position: "top-center"

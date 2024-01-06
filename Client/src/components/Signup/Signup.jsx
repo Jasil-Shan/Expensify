@@ -1,29 +1,14 @@
 import axios from 'axios'
-import * as Yup from 'yup'
 import { Formik, useFormik } from "formik"
 import { useNavigate, Link } from "react-router-dom"
 import signup from '../../assets/signup.jpg'
-
+import { signupSchema } from '../../utils/validation'
+import { toast } from 'react-toastify'
 
 
 const Signup = () => {
+
   const navigate = useNavigate()
-
-
-  const validate = Yup.object({
-    name: Yup.string()
-      .max(15, 'Must be 15 characters or less')
-      .required('First Name Required'),
-    email: Yup.string()
-      .email('invalid email address')
-      .required('Email is required'),
-    password: Yup.string()
-      .min(6, 'password must be at least 6 charecters')
-      .required("Password is required"),
-    confirmpassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm Password is Required')
-  })
 
   const formik = useFormik({
     initialValues: {
@@ -33,7 +18,7 @@ const Signup = () => {
       confirmpassword: ''
     },
 
-    validationSchema: validate,
+    validationSchema: signupSchema,
 
     onSubmit: async (values) => {
       try {
@@ -43,9 +28,7 @@ const Signup = () => {
           toast.success(data.message, {
             position: "top-center"
           })
-
-          navigate("/verifyMail")
-
+          navigate("/login")
         } else {
           toast.error(data.message, {
             position: "top-center"
@@ -53,10 +36,6 @@ const Signup = () => {
         }
 
       } catch (error) {
-        toast.error(error.message, {
-          position: "top-center",
-
-        })
         console.log(error)
       }
     }
@@ -73,19 +52,18 @@ const Signup = () => {
             <p className="text-sm mt-4 text-[#002D74]">
               Lets Start Your Journey!
             </p>
-            {/* {errorMessage ? <div className="text-red-500 pb-6 text-center ">{errorMessage}</div> : ""} */}
-
             <form
               onSubmit={formik.handleSubmit}
               className="flex flex-col gap-4"
             >
               <input
-                className="p-2 mt-8 rounded-xl border"
+                className="p-2 mt-8 rounded-xl "
                 type="text"
                 name="name"
                 placeholder="Full Name"
                 id="name"
                 onChange={formik.handleChange}
+                required
               />
               {formik.touched.name && formik.errors.name ? (
                 <div className="text-red-500">{formik.errors.name}</div>
@@ -98,6 +76,7 @@ const Signup = () => {
                 placeholder="Email"
                 id="email"
                 onChange={formik.handleChange}
+                required
               />
               {formik.touched.email && formik.errors.email ? (
                 <div className="text-red-500">{formik.errors.email}</div>
@@ -111,6 +90,7 @@ const Signup = () => {
                   id="password"
                   placeholder="Password"
                   onChange={formik.handleChange}
+                  required
                 />
                 {formik.touched.password && formik.errors.password ? (
                   <div className="text-red-500">{formik.errors.password}</div>
@@ -123,6 +103,7 @@ const Signup = () => {
                 id="confirmpassword"
                 placeholder="Confirm Password"
                 onChange={formik.handleChange}
+                required
               />
               {formik.touched.confirmpassword &&
                 formik.errors.confirmpassword ? (
