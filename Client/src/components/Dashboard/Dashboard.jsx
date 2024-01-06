@@ -70,15 +70,15 @@ const Dashboard = () => {
     <>
       <Sidebar />
       <div className="grid grid-cols-2 ml-40 mt-16  md:flex justify-center gap-4">
-        <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+        <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100"
         >
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
             This month Expense
           </h5>
           <p className="font-extrabold text-center text-red-700">{totalAmount}</p>
         </div>
-        <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
             This month Budget
           </h5>
           {editMode ? (
@@ -88,7 +88,7 @@ const Dashboard = () => {
               onChange={(e) => setBudget(e.target.value)}
             />
           ) : (
-            <p className="font-extrabold text-center text-green-700">{expenses[0]?.user.monthlyBudget}</p>
+            <p className="font-extrabold text-center text-green-700">{expenses[0]?.user.monthlyBudget || 0} </p>
           )}
           <div>
             {editMode ? (
