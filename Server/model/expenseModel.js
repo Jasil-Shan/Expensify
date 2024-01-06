@@ -4,7 +4,7 @@ const expenseSchema = new mongoose.Schema({
 
     user :  {
         type : mongoose.Schema.Types.ObjectId ,
-        ref : 'Users' ,
+        ref : 'user' ,
         required : true
       },
     amount: {
@@ -22,6 +22,6 @@ const expenseSchema = new mongoose.Schema({
     
 });
 
-const userModel = mongoose.model("user", userSchema)
+const expenseModel = mongoose.model("expense", expenseSchema)
 
-export default userModel
+export default expenseModel
