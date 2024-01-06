@@ -10,7 +10,7 @@ const Sidebar = () => {
 
     return (
         <div>
-            <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 shadow-md">
                 <div className="px-3 py-3 lg:px-5 lg:pl-3">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center justify-start">
@@ -38,7 +38,7 @@ const Sidebar = () => {
                                 </svg>
                             </button>
                             <a href="https://flowbite.com" className="flex ml-2 md:mr-24">
-                                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">
                                     Expensify
                                 </span>
                             </a>
@@ -66,7 +66,7 @@ const Sidebar = () => {
                                 >
                                     <div className="px-4 py-3" role="none">
                                         <p
-                                            className="text-sm text-gray-900 dark:text-white"
+                                            className="text-sm text-gray-900"
                                             role="none"
                                         >
                                             Neil Sims
@@ -115,13 +115,13 @@ const Sidebar = () => {
             <aside
                 id="logo-sidebar"
                 className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${isSidebarOpen ? "" : "-translate-x-full"
-                    } bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
+                    } bg-white border-r border-gray-200 sm:translate-x-0 shadow-md`}
                 aria-label="Sidebar"
             >
-                <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+                <div className="h-full px-3 pb-4 overflow-y-auto bg-white ">
                     <ul className="space-y-2 font-medium">
                         <li>
-                            <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <a className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <svg
                                     className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                                     aria-hidden="true"
@@ -139,7 +139,7 @@ const Sidebar = () => {
                             </a>
                         </li>
                         <li>
-                            <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <a className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <svg
                                     className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                                     aria-hidden="true"
@@ -160,7 +160,7 @@ const Sidebar = () => {
 
 
                         <li>
-                            <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <a className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <svg
                                     className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                                     aria-hidden="true"
